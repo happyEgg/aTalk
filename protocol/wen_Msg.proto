@@ -1,0 +1,76 @@
+package protocol;
+
+enum Gender{
+	FEMALE = 0;
+	MALE = 1;
+}
+
+//好友
+message Friend{
+	optional string username = 1;
+	optional string remark = 2; //备注
+	optional int32 profile_photoid = 3;//头像id
+	optional int32 online = 4;
+	optional Gender sex = 5;
+}
+
+message AddFriendRequest{
+	required string sender = 1;
+	required Mode modes = 2;
+	required string receiver = 3;
+}
+
+enum Mode{
+	SYSTEM = 0;
+	FILE = 1;
+	WAIT = 2;
+	AGREE = 3;
+	REFUSE = 4;
+	TEXT = 5;
+}
+
+//发送消息
+message SendMessage{
+	optional string receiver = 1;
+	optional Mode type = 2;
+	optional string msg = 3;
+	optional bytes file = 4;
+	optional int64 msg_time = 5;
+	optional int64 file_size = 6;
+}
+message WMessage{
+	required string msg_type = 1;
+	optional int32 msg_type_id = 2;
+	optional string system = 3;
+	optional SendMessage send_msg = 4;
+	optional User user_info = 5;
+	optional int32 stata_code = 6;
+	optional AddFriendRequest add_friend = 7;
+	repeated Friend friends = 8;
+	optional int64 msg_time = 9;
+	optional Groups group = 10;
+	optional string devices = 11;
+}
+
+message Groups{
+	optional string id = 1;
+	optional string group_name = 2;
+	optional string owner = 3;
+	optional string description = 4;
+	repeated Friend group_member = 5;
+}
+
+message User{
+	optional string id = 1;
+	required string username = 2;
+	optional string password = 3;
+	optional string new_password = 4;
+	optional Gender sex = 5[default = MALE];//性别
+	optional sint32 age = 6;
+	optional string phone = 7;
+	optional string real_name = 8;
+	optional int32 profile_photoid = 9;//头像id
+	optional int32 chat_groundid = 10;//聊天背景id
+	optional string email = 11;
+	optional string notice = 12;
+}

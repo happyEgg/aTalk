@@ -1,0 +1,8 @@
+{{template "header.html" .}}
+<div>
+<form id="uploadform" action="/uploadform" method="post" enctype="multipart/form-data">
+	<h3>File:</h3><input type="file" name="filename"><br><br>
+	<input type="submit">
+</form>
+</div>
+{{template "footer.html" .}}
